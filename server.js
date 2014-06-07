@@ -1,7 +1,8 @@
 var express  = require('express');
-var io      = require('socket.io');
+require("underscore");
 var app      = express();
-var port = 3700;
+var http = require('http').Server(app);
+var io      = require('socket.io')(http);
 var twitter = require('twitter');
 var util = require('util');
 var twit = new twitter({
@@ -21,27 +22,41 @@ app.get('*', function(req, res) {
 	res.sendfile(__dirname + '/public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
 
-io = io.listen(app.listen(port), { log: false });
 
 var sockets = {};
 io.sockets.on('connection', function (socket) {
+  console.log('yeah: '+socket.id);
 
-  var username = 'username'; //get user name from socket
-  if(sockets[username]) {
-    sockets[username].push(socket.id);
-  }
-  else {
-    sockets[username] = [socket.id];
-  }
-  socket.emit({'msg': {'user': 'TweetDash', 'msg': 'Welcome'}});
+  socket.emit({'service': 'getUsername'});
+  socket.on('username', function (username) {
+    if(sockets[username]) {
+      sockets[username].push(socket.id);
+    }
+    else {
+      sockets[username] = [socket.id];
+    }
+
+    socket.emit({'msg': {'user': 'TweetDash', 'msg': 'Welcome '+username}});
+  });
+
 });
 
-var sendUpdate = function() {
-  var updates = "{test}" //get twitter updates
-  if(updates.length) {
-    io.sockets.emit('message', "new Message");
-  }
+//new tweets example
+var newTweets = function(username, tweets) {
+  //parse functions
+  //data = 
+  _.each(sockets[username], function(socket){
+    sendUpdate(socket, data);
+  });
 }
 
-app.listen(8000);
+//the twitter pull function calls the sendUpdate function for each connected client with all updates
+//each update consists of a type and a body e.g. {'type': 'msg', 'body': 'this is my message'}
+var sendUpdate = function(socket, updates) {
+  _.each(updates, function(update) {
+    socket.emit(update.type, update.body);
+  });
+}
+
+http.listen(8000);
 console.log("App listening on port 8000");
