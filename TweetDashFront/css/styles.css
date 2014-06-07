@@ -1,0 +1,72 @@
+/*
+ * Style tweaks
+ * --------------------------------------------------
+ */
+body {
+  padding-top: 0px;
+  background-color: #0d1318;
+}
+
+.tweet {
+	display: table;
+	width: 100%;
+	padding: 20px;
+}
+
+hr {
+	margin: 0 0 0 112px;
+	display: block; 
+	height: 1px;
+	border: 0; 
+	border-top: 1px solid #45636e;
+	padding: 0;
+}
+
+.tweetavatar, .tweetcontent {
+	display: table-cell;
+}
+
+.tweetavatar {
+	width: 72px;
+}
+
+.tweetavatar > img {
+	display: block;
+	width: 72px;
+	height: 72px;
+	border-radius: 10px;
+}
+
+.tweetcontent {
+	position: absolute;
+	margin-left: 20px;
+}
+
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -15px;
+  margin-bottom: 20px;
+  margin-left: -15px;
+  color: #fff;
+  background-color: #161f26;
+}
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+  background-color: #fff;
+}
+/*
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}*/
+.main .page-header {
+  margin-top: 0;
+}
