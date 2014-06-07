@@ -21,4 +21,9 @@ phonecatApp.controller('PhoneListCtrl', function ($scope, socket) {
     // socket.emit
   });
 
+  $scope.$on('$destroy', function (event) {
+        socket.removeAllListeners();
+        // or something like
+        // socket.removeListener(this);
+    });
 });
