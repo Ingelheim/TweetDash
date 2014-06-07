@@ -4,6 +4,7 @@ console.log(tweetDashApp);
 tweetDashApp.controller('TweetDashCtrl', function ($scope, socket) {
 
   console.log('angular ctrl');
+  $scope.test = "TESTSTST"
 
   $scope.userName = userName;
 
@@ -13,6 +14,10 @@ tweetDashApp.controller('TweetDashCtrl', function ($scope, socket) {
     if (data === 'getUsername') {
       socket.emit('username', $scope.userName);
     }
+  });
+
+  socket.on('msg', function(data){
+    console.log('user: '+data['user']+' text: '+data['text']);
   });
 
   $scope.$on('$destroy', function (event) {

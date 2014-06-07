@@ -1,13 +1,42 @@
 doctype
 html(ng-app="tweetDashApp")
-  head
-    script(type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js")
-    script(type='text/javascript' src="https://cdn.socket.io/socket.io-1.0.4.js")
+head
+		meta(http-equiv='content-type', content='text/html; charset=UTF-8')
+		meta(charset='utf-8')
+		title TweetDash
+		meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+		link(href='css/bootstrap.css', rel='stylesheet')
+		link(href='css/styles.css', rel='stylesheet')
+		script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js")
+		script(src="https://cdn.socket.io/socket.io-1.0.4.js")
+		script(src="client.js")
+		script(src="socketService.js")
 
-  body(ng-controller="TweetDashCtrl")
-    script.
-      var userName = "#{name}"
-    {{test}}
-
-    script(src="client.js")
-    script(src="socketService.js")
+	body(ng-controller="TweetDashCtrl")
+		script.
+			var userName = "#{name}"
+		.container-fluid
+			.row.row-offcanvas.row-offcanvas-left
+				#sidebar.col-lg-4(role='navigation')
+					.nav.nav-sidebar
+						.tweet
+							.tweetavatar
+								img(src='image/test.png', alt='')
+							.tweetcontent
+								p.small test
+								p
+									| Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+						hr
+						.tweet
+							.tweetavatar
+								img(src='image/test.png', alt='')
+							.tweetcontent
+								p.small test
+								p
+									| Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+				.col-lg-8.main
+					h1.page-header
+						| Dashboard
+					.row.placeholders
+		script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
+		script(src='js/bootstrap.min.js')
