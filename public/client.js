@@ -1,4 +1,5 @@
 var tweetDashApp = angular.module('tweetDashApp', []);
+console.log(tweetDashApp);
 
 tweetDashApp.controller('TweetDashCtrl', function ($scope, socket) {
 

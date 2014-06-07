@@ -1,11 +1,13 @@
 doctype
-html
-	head(ng-app="tweetDashApp")
-		script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js")
-		script(src="https://cdn.socket.io/socket.io-1.0.4.js")
-		script(src="client.js")
-		script(src="socketService.js")
+html(ng-app="tweetDashApp")
+  head
+    script(type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js")
+    script(type='text/javascript' src="https://cdn.socket.io/socket.io-1.0.4.js")
 
-	body(ng-controller="TweetDashCtrl")
-		script.
-			var userName = "#{name}"
+  body(ng-controller="TweetDashCtrl")
+    script.
+      var userName = "#{name}"
+    {{test}}
+
+    script(src="client.js")
+    script(src="socketService.js")
