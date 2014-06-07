@@ -93,9 +93,12 @@ figure {
   margin: 1em 40px;
 }
 hr {
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  height: 0;
+	margin: 0 0 0 112px;
+	display: block; 
+	height: 1px;
+	border: 0; 
+	border-top: 1px solid #45636e;
+	padding: 0;
 }
 pre {
   overflow: auto;
@@ -201,7 +204,7 @@ html {
 }
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.42857143;
   color: #333333;
   background-color: #ffffff;

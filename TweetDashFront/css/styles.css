@@ -8,9 +8,10 @@ body {
 }
 
 .tweet {
+	position: relative;
 	display: table;
 	width: 100%;
-	padding: 20px;
+	padding: 0px;
 }
 
 hr {
@@ -27,19 +28,18 @@ hr {
 }
 
 .tweetavatar {
-	width: 72px;
-}
-
-.tweetavatar > img {
-	display: block;
+	vertical-align:top;
 	width: 72px;
 	height: 72px;
+}
+
+.tweetavatar img {
 	border-radius: 10px;
+	margin: 20px;
 }
 
 .tweetcontent {
-	position: absolute;
-	margin-left: 20px;
+	padding: 20px 20px 10px 0;
 }
 
 
