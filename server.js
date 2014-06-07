@@ -24,6 +24,8 @@ app.get('*', function(req, res) {
 	//   console.log(util.inspect(data));
 	// });
 	res.render('index.jade', {name: userName});
+	// res.sendfile(__dirname +'/views/index.html');
+
 });
 
 

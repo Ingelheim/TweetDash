@@ -3,6 +3,7 @@ var tweetDashApp = angular.module('tweetDashApp', []);
 tweetDashApp.controller('TweetDashCtrl', function ($scope, socket) {
 
   console.log('angular ctrl');
+  $scope.test = "TESTSTST"
 
   $scope.userName = userName;
 
