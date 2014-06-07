@@ -4,8 +4,6 @@ phonecatApp.controller('PhoneListCtrl', function ($scope, socket) {
 
   // on init: send username to socket
   // 
-
-
   socket.on('init', function (data) {
     // $scope.name = data.name;
     // $scope.users = data.users;
