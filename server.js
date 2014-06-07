@@ -1,6 +1,7 @@
 var express  = require('express');
 var io       = require('socket.io');
 var app      = express();
+var port = 3700;
 
 app.use(express.static(__dirname + '/public'));
 
@@ -9,7 +10,7 @@ app.get('*', function(req, res) {
 });
 
 
-io = io.listen(app, { log: false });
+io = io.listen(app.listen(port), { log: false });
 
 var sockets = {};
 io.sockets.on('connection', function (socket) {
@@ -31,4 +32,5 @@ var sendUpdate = function() {
   }
 }
 
-
+app.listen(8000);
+console.log("App listening on port 8000");
