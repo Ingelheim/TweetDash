@@ -7,20 +7,30 @@ body {
   background-color: #0d1318;
 }
 
-.tweet {
-	position: relative;
-	display: table;
-	width: 100%;
-	padding: 0px;
-}
-
 hr {
 	margin: 0 0 0 112px;
 	display: block; 
 	height: 1px;
 	border: 0; 
-	border-top: 1px solid #45636e;
+	border-top: 1px solid #0d1318;
 	padding: 0;
+}
+
+/* Tweets navigation */
+.nav-sidebar {
+  margin-right: -15px;
+  margin-bottom: 20px;
+  margin-left: -15px;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background-color: #161f26;
+}
+
+.tweet {
+	position: relative;
+	display: table;
+	width: 100%;
+	padding: 0px;
 }
 
 .tweetavatar, .tweetcontent {
@@ -39,18 +49,13 @@ hr {
 }
 
 .tweetcontent {
-	padding: 20px 20px 10px 0;
+	padding: 16px 20px 10px 0;
 }
 
-
-/* Sidebar navigation */
-.nav-sidebar {
-  margin-right: -15px;
-  margin-bottom: 20px;
-  margin-left: -15px;
-  color: #fff;
-  background-color: #161f26;
+.meta {
+	color: #45636e;
 }
+
 
 /*
  * Main content
@@ -58,15 +63,5 @@ hr {
 
 .main {
   padding: 20px;
-  background-color: #fff;
-}
-/*
-@media (min-width: 768px) {
-  .main {
-    padding-right: 40px;
-    padding-left: 40px;
-  }
-}*/
-.main .page-header {
-  margin-top: 0;
+  height: 100%;
 }
