@@ -14,21 +14,28 @@ var twit = new twitter({
 
 
 app.use(express.static(__dirname + '/public'));
+// app.set('views', __dirname + '/views');
+// app.set('view enigne', 'jade');
 
 app.get('*', function(req, res) {
+	var userName = req.url.replace('/', '');
+
 	// 	twit.get('/statuses/show/27593302936.json', {include_entities:true}, function(data) {
 	//   console.log(util.inspect(data));
 	// });
-	res.sendfile(__dirname + '/public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+	res.render('index.jade', {name: userName});
 });
 
 
 var sockets = {};
 io.sockets.on('connection', function (socket) {
-  console.log('yeah: '+socket.id);
+	console.log("conected socket "+ socket.id);
 
-  socket.emit({'service': 'getUsername'});
+  socket.emit('service', 'getUsername');
+
   socket.on('username', function (username) {
+		console.log("username: "+username);
+
     if(sockets[username]) {
       sockets[username].push(socket.id);
     }
@@ -44,7 +51,7 @@ io.sockets.on('connection', function (socket) {
 //new tweets example
 var newTweets = function(username, tweets) {
   //parse functions
-  //data = 
+  //data =
   _.each(sockets[username], function(socket){
     sendUpdate(socket, data);
   });
