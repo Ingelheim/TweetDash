@@ -1,8 +1,8 @@
 var tweetDashApp = angular.module('tweetDashApp', []);
 console.log(tweetDashApp);
 
-tweetDashApp.controller('TweetDashCtrl', function ($scope, socket) {
-  var whichTemplate = 'default';
+tweetDashApp.controller('TweetDashCtrl', function ($scope, socket, $window) {
+  $scope.whichTemplate = 'youtube';
 
   console.log('angular ctrl');
   $scope.tweets = [];
@@ -10,7 +10,7 @@ tweetDashApp.controller('TweetDashCtrl', function ($scope, socket) {
   $scope.userName = userName;
 
   $scope.showTemplate = function(){
-    return whichTemplate;
+    return $scope.whichTemplate;
   }
 
   socket.on('service', function (data) {
@@ -27,9 +27,8 @@ tweetDashApp.controller('TweetDashCtrl', function ($scope, socket) {
     var hashtag = reg.exec(data['text']);
     console.log('hashtag', hashtag);
     if(hashtag && _.contains(functions, hashtag[0])) {
-      whichTemplate = hashtag[0].replace('#', ''); //should use something like var reg = /\#(\w*)/
+      $scope.whichTemplate = hashtag[0].replace('#', ''); //should use something like var reg = /\#(\w*)/
       console.log('whichTemplate', whichTemplate);
-      // whichTemplate = hashtag[0].replace('#', ''); //should use something like var reg = /\#(\w*)/
     }
     else {
       $scope.tweets.push(data);

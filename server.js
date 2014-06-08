@@ -59,7 +59,7 @@ io.on('connection', function (socket) {
       });
     }
 
-    newTweet(username, {'id': 0, 'user': {'screen_name': 'TweetDash'}, 'text': 'Welcome to TweetDash'});
+    newTweet(username, {'id': 0, 'user': {'screen_name': 'TweetDash1'}, 'text': 'Welcome to TweetDash'});
   });
 
   socket.on('disconnect', function() {
@@ -106,7 +106,7 @@ var twitterMockupString = { created_at: 'Sat Jun 07 23:28:51 +0000 2014',
   in_reply_to_user_id: null,
   in_reply_to_user_id_str: null,
   in_reply_to_screen_name: null,
-  user: 
+  user:
    { id: 14348674,
      id_str: '14348674',
      name: 'Vincent Composieux',
@@ -152,7 +152,7 @@ var twitterMockupString = { created_at: 'Sat Jun 07 23:28:51 +0000 2014',
   contributors: null,
   retweet_count: 0,
   favorite_count: 0,
-  entities: 
+  entities:
    { hashtags: [ [Object] ],
      symbols: [],
      urls: [ [Object] ],
