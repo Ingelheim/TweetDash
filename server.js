@@ -43,8 +43,10 @@ io.on('connection', function (socket) {
       var tweetDashId = username;
       var tweetDashHandle = '@' + tweetDashId;
       twit.stream('user', {track: tweetDashHandle}, function(stream) {
+        console.log(stream);
           twitterStream = stream;
           stream.on('data', function(data) {
+              console.log(data);
             if(data['user'] && data.text.indexOf(tweetDashHandle) >= 0) {
               // TODO debug
               // var toRemove = new RegExp(tweetDashHandle, "g");
@@ -56,7 +58,7 @@ io.on('connection', function (socket) {
       });
     }
 
-    newTweet(username, {'id': 0, 'user': {'screen_name': 'TweetDash1'}, 'text': 'Welcome to TweetDash'});
+    newTweet(username, {'id': 0, 'user': {'screen_name': tweetDashId}, 'text': 'Welcome to TweetDash'});
   });
 
   socket.on('disconnect', function() {
