@@ -32,7 +32,7 @@ tweetDashApp.controller('TweetDashCtrl', function ($scope, socket, $window) {
     if (hashtag) {
       $scope.showYoutube = hashtag[0] === '#youtube';
     }
-    
+
     if(hashtag && _.contains(functions, hashtag[0])) {
       whichTemplate = hashtag[0].replace('#', ''); //should use something like var reg = /\#(\w*)/
       console.log('whichTemplate', whichTemplate);
