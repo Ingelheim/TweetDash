@@ -16,8 +16,18 @@ tweetDashApp.controller('TweetDashCtrl', function ($scope, socket) {
     }
   });
 
+  var functions = ['image', 'analytics'];  //in the future this array should be populated by the filnenames of public/hashtags/filename.html
   socket.on('msg', function(data){
-    $scope.tweets.push(data);
+    var reg = /\#(\w*)/; //try to grab the second word after the hashtag for urls
+    var hashtag = reg.exec(data['text']);
+    if(hashtag && _.contains(functions, hashtag[0])) {
+      $scope.templateUrl = hashtag[0].replace('#', '')+'.html'; //should use something like var reg = /\#(\w*)/
+      console.log('templateUrl: '+$scope.templateUrl);
+      //set template url to hashtag[0]
+    }
+    else {
+      $scope.tweets.push(data);
+    }
   });
 
   $scope.$on('$destroy', function (event) {

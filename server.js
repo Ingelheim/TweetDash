@@ -59,6 +59,7 @@ var newTweet = function(username, tweet) {
   image = tweet['user']['profile_image_url'];
 
   _.each(sockets[username], function(socket){
+    //the server doesn't need to know of what type the message is
     sendUpdate(socket, {'type': 'msg', 'body': {'id': tweet['id'], 'user': user, 'image': image, 'text': text}});
   });
 }
