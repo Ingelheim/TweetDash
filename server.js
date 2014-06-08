@@ -45,8 +45,7 @@ io.sockets.on('connection', function (socket) {
       sockets[username] = [socket];
     }
 
-    socket.emit({'msg': {'user': 'TweetDash', 'msg': 'Welcome '+username}});
-    newTweet(username, twitterMockupString);
+    newTweet(username, {'id': 0, 'user': {'screen_name': 'TweetDash'}, 'text': 'Welcome to TweetDash'});
   });
 
 });
@@ -55,11 +54,12 @@ io.sockets.on('connection', function (socket) {
 var newTweet = function(username, tweet) {
   //parse functions
   //data =
-  user = tweet['user'];
+  user = tweet['user']['screen_name'];
   text = tweet['text'];
+  image = tweet['user']['profile_image_url'];
 
   _.each(sockets[username], function(socket){
-    sendUpdate(socket, {'type': 'msg', 'body': {'user': user, 'text': text}});
+    sendUpdate(socket, {'type': 'msg', 'body': {'id': tweet['id'], 'user': user, 'image': image, 'text': text}});
   });
 }
 
@@ -143,12 +143,14 @@ var twitterMockupString = { created_at: 'Sat Jun 07 23:28:51 +0000 2014',
   lang: 'en' }
 
 
-/*
-twit.stream('user', {track:'nodejs'}, function(stream) {
+twit.stream('user', {track:'funny'}, function(stream) {
     stream.on('data', function(data) {
-        console.log(util.inspect(data));
+      if(data['user']) {
+        _.each(Object.keys(sockets), function(username){
+          newTweet(username, data);
+        });
+      }
     });
     // Disconnect stream after five seconds
     //setTimeout(stream.destroy, 5000);
 });
-*/

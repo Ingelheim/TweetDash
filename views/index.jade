@@ -18,22 +18,15 @@ head
 		.container-fluid
 			.row.row-offcanvas.row-offcanvas-left
 				#sidebar.col-lg-4(role='navigation')
-					.nav.nav-sidebar
+					.nav.nav-sidebar('ng-repeat'="tweet in tweets | orderBy:'id':true")
 						.tweet
 							.tweetavatar
-								img(src='image/test.png', alt='')
+								img(src="{{tweet['image']}}", alt='')
 							.tweetcontent
-								p.small test
+								p.small {{tweet['user']}}
 								p
-									| Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+									| {{tweet['text']}}
 						hr
-						.tweet
-							.tweetavatar
-								img(src='image/test.png', alt='')
-							.tweetcontent
-								p.small test
-								p
-									| Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
 				.col-lg-8.main
 					h1.page-header
 						| Dashboard
