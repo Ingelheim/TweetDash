@@ -4,13 +4,10 @@ var app      = express();
 var http = require('http').Server(app);
 var io      = require('socket.io')(http);
 var twitter = require('twitter');
+var config = require('./config');
+
 var util = require('util');
-var twit = new twitter({
-	consumer_key: 'dHAtDthdr6ZG3OlOPQBu3cuRH',
-	consumer_secret: 'FNMM5iWEVS1yOOmB71OZiECJKd8h9ZeHZeDXLhlrkv0rJ0Kohw',
-	access_token_key: '998546844-O0CmoBh5ZeOwfxo1btcEY4lI5QyxKf7oQDd5kvFj',
-	access_token_secret: 'SMMovKIeOynju1BsaEuuHHCaC32zewlyVwLfuq4KwVd0j'
-});
+var twit = new twitter(config);
 
 
 app.use(express.static(__dirname + '/public'));
@@ -47,9 +44,14 @@ io.on('connection', function (socket) {
       var tweetDashHandle = '@' + tweetDashId;
       /*
       twit.stream('user', {track: tweetDashHandle}, function(stream) {
+        console.log(stream);
           twitterStream = stream;
           stream.on('data', function(data) {
+<<<<<<< HEAD
             console.log('data: '+data);
+=======
+              console.log(data);
+>>>>>>> c159feea925c97ca60ea63500e429078bacbefb0
             if(data['user'] && data.text.indexOf(tweetDashHandle) >= 0) {
               // TODO debug
               // var toRemove = new RegExp(tweetDashHandle, "g");
@@ -63,7 +65,7 @@ io.on('connection', function (socket) {
       setInterval(function(){newTweet(username, twitterMockupString)}, 1000);
     }
 
-    newTweet(username, {'id': 0, 'user': {'screen_name': 'TweetDash'}, 'text': 'Welcome to TweetDash'});
+    newTweet(username, {'id': 0, 'user': {'screen_name': tweetDashId}, 'text': 'Welcome to TweetDash'});
   });
 
   socket.on('disconnect', function() {
@@ -102,7 +104,7 @@ console.log("App listening on port 8000");
 var twitterMockupString = { created_at: 'Sat Jun 07 23:28:51 +0000 2014',
   id: 475419144301871100,
   id_str: '475419144301871104',
-  text: 'this is a test #image http://screenshots.de.sftcdn.net/de/scrn/40000/40219/acronis-true-image-13.png test',
+  text: 'this is a test #youtube http://screenshots.de.sftcdn.net/de/scrn/40000/40219/acronis-true-image-13.png test',
   source: '<a href="http://www.apple.com" rel="nofollow">iOS</a>',
   truncated: false,
   in_reply_to_status_id: null,
@@ -110,7 +112,7 @@ var twitterMockupString = { created_at: 'Sat Jun 07 23:28:51 +0000 2014',
   in_reply_to_user_id: null,
   in_reply_to_user_id_str: null,
   in_reply_to_screen_name: null,
-  user: 
+  user:
    { id: 14348674,
      id_str: '14348674',
      name: 'Vincent Composieux',
@@ -156,7 +158,7 @@ var twitterMockupString = { created_at: 'Sat Jun 07 23:28:51 +0000 2014',
   contributors: null,
   retweet_count: 0,
   favorite_count: 0,
-  entities: 
+  entities:
    { hashtags: [ [Object] ],
      symbols: [],
      urls: [ [Object] ],

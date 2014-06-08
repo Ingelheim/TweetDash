@@ -1,13 +1,16 @@
 var tweetDashApp = angular.module('tweetDashApp', []);
 console.log(tweetDashApp);
 
-tweetDashApp.controller('TweetDashCtrl', function ($scope, socket) {
-  var whichTemplate = 'default';
+var whichTemplate = 'default';
+tweetDashApp.controller('TweetDashCtrl', function ($scope, socket, $window) {
 
   console.log('angular ctrl');
   $scope.tweets = [];
+  $scope.url = '';
 
   $scope.userName = userName;
+
+  $scope.showYoutube = false;
 
   $scope.showTemplate = function(){
     return whichTemplate;
@@ -21,7 +24,7 @@ tweetDashApp.controller('TweetDashCtrl', function ($scope, socket) {
     }
   });
 
-  var functions = ['image', 'analytics', 'youtube'];  //in the future this array should be populated by the filnenames of public/hashtags/filename.html
+  var functions = ['image', 'analytics'];  //in the future this array should be populated by the filnenames of public/hashtags/filename.html
   socket.on('msg', function(data){
     var reg = /\#(\w*)\s(\S*)/; //try to grab the second word after the hashtag for urls
     reg.exec(data['text']);
@@ -29,14 +32,22 @@ tweetDashApp.controller('TweetDashCtrl', function ($scope, socket) {
     var hashtag = RegExp.$1;
     var url = RegExp.$2;
     console.log('test: '+hashtag+' '+url);
+
+    if (hashtag) {
+      $scope.showYoutube = hashtag[0] === '#youtube';
+    }
+
     if(hashtag && _.contains(functions, hashtag)) {
       console.log('I have a hashtag');
       whichTemplate = hashtag; //should use something like var reg = /\#(\w*)/
+      $scope.url = url;
       // whichTemplate = hashtag[0].replace('#', ''); //should use something like var reg = /\#(\w*)/
     }
     else {
       $scope.tweets.push(data);
     }
+
+    console.log($scope.showYoutube);
   });
 
   $scope.$on('$destroy', function (event) {
