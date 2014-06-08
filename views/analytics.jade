@@ -1,73 +1,71 @@
-<script type="text/ng-template" id="analytics.html">
-  <!-- Step 1: Create the containing elements. -->
+<!-- Step 1: Create the containing elements. -->
 
-  <section id="auth-button"></section>
-  <section id="view-selector"></section>
-  <section id="timeline"></section>
+<section id="auth-button"></section>
+<section id="view-selector"></section>
+<section id="timeline"></section>
 
-  <script>
+<script>
 
-  // Step 2: Load the library.
+// Step 2: Load the library.
 
-  (function(doc, s, js, fjs) {
-    js = doc.createElement(s), fjs = doc.getElementsByTagName(s)[0];
-    js.src = 'https://apis.google.com/js/platform.js';
-    fjs.parentNode.insertBefore(js, fjs);
-    js.onload = function() {
-      gapi.load('analytics', embedApiLoadCallback);
-    }
-  }(document, 'script'));
-
-  /**
-   * The callback to be invoked when the Embed API is fully loaded.
-   */
-  function embedApiLoadCallback() {
-
-    // Step 3: Authorize the user.
-
-    var CLIENT_ID = 'Insert your client ID here';
-
-    gapi.analytics.auth.authorize({
-      container: 'auth-button',
-      clientid: CLIENT_ID,
-    });
-
-    // Step 4: Create the view selector.
-
-    var viewSelector = new gapi.analytics.ViewSelector({
-      container: 'view-selector'
-    });
-
-    // Step 5: Create the timeline chart.
-
-    var timeline = new gapi.analytics.googleCharts.DataChart({
-      reportType: 'ga',
-      query: {
-        'dimensions': 'ga:date',
-        'metrics': 'ga:sessions',
-        'start-date': '30daysAgo',
-        'end-date': 'yesterday',
-      },
-      chart: {
-        type: 'LINE',
-        container: 'timeline'
-      }
-    });
-
-    // Step 6: Hook up the components to work together.
-
-    gapi.analytics.auth.on('success', function(response) {
-      viewSelector.execute();
-    });
-
-    viewSelector.on('change', function(ids) {
-      var newIds = {
-        query: {
-          ids: ids
-        }
-      }
-      timeline.set(newIds).execute();
-    });
+(function(doc, s, js, fjs) {
+  js = doc.createElement(s), fjs = doc.getElementsByTagName(s)[0];
+  js.src = 'https://apis.google.com/js/platform.js';
+  fjs.parentNode.insertBefore(js, fjs);
+  js.onload = function() {
+    gapi.load('analytics', embedApiLoadCallback);
   }
-  </script>
+}(document, 'script'));
+
+/**
+ * The callback to be invoked when the Embed API is fully loaded.
+ */
+function embedApiLoadCallback() {
+
+  // Step 3: Authorize the user.
+
+  var CLIENT_ID = 'Insert your client ID here';
+
+  gapi.analytics.auth.authorize({
+    container: 'auth-button',
+    clientid: CLIENT_ID,
+  });
+
+  // Step 4: Create the view selector.
+
+  var viewSelector = new gapi.analytics.ViewSelector({
+    container: 'view-selector'
+  });
+
+  // Step 5: Create the timeline chart.
+
+  var timeline = new gapi.analytics.googleCharts.DataChart({
+    reportType: 'ga',
+    query: {
+      'dimensions': 'ga:date',
+      'metrics': 'ga:sessions',
+      'start-date': '30daysAgo',
+      'end-date': 'yesterday',
+    },
+    chart: {
+      type: 'LINE',
+      container: 'timeline'
+    }
+  });
+
+  // Step 6: Hook up the components to work together.
+
+  gapi.analytics.auth.on('success', function(response) {
+    viewSelector.execute();
+  });
+
+  viewSelector.on('change', function(ids) {
+    var newIds = {
+      query: {
+        ids: ids
+      }
+    }
+    timeline.set(newIds).execute();
+  });
+}
 </script>
