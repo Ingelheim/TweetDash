@@ -34,7 +34,7 @@ tweetDashApp.controller('TweetDashCtrl', function ($scope, socket, $window) {
     console.log('test: '+hashtag+' '+url);
 
     if (hashtag) {
-      $scope.showYoutube = hashtag[0] === '#youtube';
+      $scope.showYoutube = hashtag === 'youtube';
     }
 
     if(hashtag && _.contains(functions, hashtag)) {

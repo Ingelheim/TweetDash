@@ -42,7 +42,6 @@ io.on('connection', function (socket) {
       sockets[username] = [socket];
       var tweetDashId = username;
       var tweetDashHandle = '@' + tweetDashId;
-      /*
       twit.stream('user', {track: tweetDashHandle}, function(stream) {
         console.log(stream);
           twitterStream = stream;
@@ -61,8 +60,8 @@ io.on('connection', function (socket) {
             }
           });
       });
-      */
-      setInterval(function(){newTweet(username, twitterMockupString)}, 1000);
+      //
+      //setInterval(function(){newTweet(username, twitterMockupString)}, 1000);
     }
 
     newTweet(username, {'id': 0, 'user': {'screen_name': tweetDashId}, 'text': 'Welcome to TweetDash'});
