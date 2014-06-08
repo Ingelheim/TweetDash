@@ -19,7 +19,7 @@ head
 		.container-fluid
 			.row.row-offcanvas.row-offcanvas-left
 				#sidebar.col-lg-4(role='navigation')
-					.nav.nav-sidebar('ng-repeat'="tweet in tweets | orderBy:'id':true")
+					.nav.nav-sidebar(ng-repeat="tweet in tweets | orderBy:'id':true | limitTo: 5")
 						.tweet
 							.tweetavatar
 								img(src="{{tweet['image']}}", alt='')
