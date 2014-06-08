@@ -167,6 +167,3 @@ var twitterMockupString = { created_at: 'Sat Jun 07 23:28:51 +0000 2014',
   possibly_sensitive: false,
   filter_level: 'medium',
   lang: 'en' }
-
-
-

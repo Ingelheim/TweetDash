@@ -32,6 +32,7 @@ tweetDashApp.controller('TweetDashCtrl', function ($scope, socket, $window) {
     var hashtag = RegExp.$1;
     var url = RegExp.$2;
     console.log('test: '+hashtag+' '+url);
+    $scope.showYoutube = false;
 
     if (hashtag) {
       $scope.showYoutube = hashtag === 'youtube';
@@ -44,7 +45,10 @@ tweetDashApp.controller('TweetDashCtrl', function ($scope, socket, $window) {
       // whichTemplate = hashtag[0].replace('#', ''); //should use something like var reg = /\#(\w*)/
     }
     else {
-      $scope.tweets.push(data);
+      if(!$scope.showYoutube) {
+        $scope.tweets.push(data);
+      }
+
     }
 
     console.log($scope.showYoutube);
