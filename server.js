@@ -47,7 +47,6 @@ io.sockets.on('connection', function (socket) {
 
     newTweet(username, {'id': 0, 'user': {'screen_name': 'TweetDash'}, 'text': 'Welcome to TweetDash'});
   });
-
 });
 
 //new tweets example
@@ -143,10 +142,16 @@ var twitterMockupString = { created_at: 'Sat Jun 07 23:28:51 +0000 2014',
   filter_level: 'medium',
   lang: 'en' }
 
+var tweetDashId = 'TweetDash1';
+var tweetDashHandle = '@' + tweetDashId;
 
-twit.stream('user', {track:'funny'}, function(stream) {
+twit.stream('user', {track: tweetDashId}, function(stream) {
     stream.on('data', function(data) {
-      if(data['user']) {
+      if(data['user'] && data.text.indexOf(tweetDashHandle) >= 0) {
+        // TODO debug
+        // var toRemove = new RegExp(tweetDashHandle, "g");
+        // data.text.replace(toRemove, '');
+
         _.each(Object.keys(sockets), function(username){
           newTweet(username, data);
         });
