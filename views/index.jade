@@ -12,6 +12,7 @@ html(ng-app="tweetDashApp")
 		script(src="http://documentcloud.github.io/underscore/underscore-min.js")
 		script(src="client.js")
 		script(src="socketService.js")
+		script(src="swfobject.js")
 		script(src="youtube.js")
 		script(src="hashtags/image.html")
 
@@ -33,10 +34,14 @@ html(ng-app="tweetDashApp")
 				.col-lg-8.main
 					h1.page-header
 						| Dashboard
+					div(ng-switch="showTemplate()")
+						div(ng-switch-when="image")
+							include image
+						div(ng-switch-when="youtube")
+							include youtube
+						div(ng-switch-default)
+							include default
 
 					.row.placeholders
-						.template(ng-include="'image.html'")
 		script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
 		script(src='js/bootstrap.min.js')
-		include image
-		include youtube
