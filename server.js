@@ -46,11 +46,7 @@ io.on('connection', function (socket) {
         console.log(stream);
           twitterStream = stream;
           stream.on('data', function(data) {
-<<<<<<< HEAD
-            console.log('data: '+data);
-=======
-              console.log(data);
->>>>>>> c159feea925c97ca60ea63500e429078bacbefb0
+
             if(data['user'] && data.text.indexOf(tweetDashHandle) >= 0) {
               // TODO debug
               // var toRemove = new RegExp(tweetDashHandle, "g");
