@@ -45,9 +45,11 @@ io.on('connection', function (socket) {
       sockets[username] = [socket];
       var tweetDashId = username;
       var tweetDashHandle = '@' + tweetDashId;
+      /*
       twit.stream('user', {track: tweetDashHandle}, function(stream) {
           twitterStream = stream;
           stream.on('data', function(data) {
+            console.log('data: '+data);
             if(data['user'] && data.text.indexOf(tweetDashHandle) >= 0) {
               // TODO debug
               // var toRemove = new RegExp(tweetDashHandle, "g");
@@ -57,6 +59,8 @@ io.on('connection', function (socket) {
             }
           });
       });
+      */
+      setInterval(function(){newTweet(username, twitterMockupString)}, 1000);
     }
 
     newTweet(username, {'id': 0, 'user': {'screen_name': 'TweetDash'}, 'text': 'Welcome to TweetDash'});
@@ -98,7 +102,7 @@ console.log("App listening on port 8000");
 var twitterMockupString = { created_at: 'Sat Jun 07 23:28:51 +0000 2014',
   id: 475419144301871100,
   id_str: '475419144301871104',
-  text: 'Mailin: Artisanal Inbound Emails for Every Web App #nodejs http://t.co/0SyYLWKRJt',
+  text: 'this is a test #image http://screenshots.de.sftcdn.net/de/scrn/40000/40219/acronis-true-image-13.png test',
   source: '<a href="http://www.apple.com" rel="nofollow">iOS</a>',
   truncated: false,
   in_reply_to_status_id: null,

@@ -23,11 +23,15 @@ tweetDashApp.controller('TweetDashCtrl', function ($scope, socket) {
 
   var functions = ['image', 'analytics', 'youtube'];  //in the future this array should be populated by the filnenames of public/hashtags/filename.html
   socket.on('msg', function(data){
-    var reg = /\#\w*/; //try to grab the second word after the hashtag for urls
-    var hashtag = reg.exec(data['text']);
-    console.log(hashtag);
-    if(hashtag && _.contains(functions, hashtag[0])) {
-      whichTemplate = hashtag[0].replace('#', ''); //should use something like var reg = /\#(\w*)/
+    var reg = /\#(\w*)\s(\S*)/; //try to grab the second word after the hashtag for urls
+    reg.exec(data['text']);
+    console.log(data['text']);
+    var hashtag = RegExp.$1;
+    var url = RegExp.$2;
+    console.log('test: '+hashtag+' '+url);
+    if(hashtag && _.contains(functions, hashtag)) {
+      console.log('I have a hashtag');
+      whichTemplate = hashtag; //should use something like var reg = /\#(\w*)/
       // whichTemplate = hashtag[0].replace('#', ''); //should use something like var reg = /\#(\w*)/
     }
     else {
