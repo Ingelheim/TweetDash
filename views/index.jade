@@ -1,36 +1,38 @@
 doctype
 html(ng-app="tweetDashApp")
 head
-		meta(http-equiv='content-type', content='text/html; charset=UTF-8')
-		meta(charset='utf-8')
-		title TweetDash
-		meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-		link(href='css/bootstrap.css', rel='stylesheet')
-		link(href='css/styles.css', rel='stylesheet')
-		script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js")
-		script(src="https://cdn.socket.io/socket.io-1.0.4.js")
-		script(src="http://documentcloud.github.io/underscore/underscore-min.js")
-		script(src="client.js")
-		script(src="socketService.js")
+    meta(http-equiv='content-type', content='text/html; charset=UTF-8')
+    meta(charset='utf-8')
+    title TweetDash
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    link(href='css/bootstrap.css', rel='stylesheet')
+    link(href='css/styles.css', rel='stylesheet')
+    script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js")
+    script(src="https://cdn.socket.io/socket.io-1.0.4.js")
+    script(src="http://documentcloud.github.io/underscore/underscore-min.js")
+    script(src="client.js")
+    script(src="socketService.js")
+    script(src="hashtags/image.html")
 
-	body(ng-controller="TweetDashCtrl")
-		script.
-			var userName = "#{name}"
-		.container-fluid
-			.row.row-offcanvas.row-offcanvas-left
-				#sidebar.col-lg-4(role='navigation')
-					.nav.nav-sidebar('ng-repeat'="tweet in tweets | orderBy:'id':true")
-						.tweet
-							.tweetavatar
-								img(src="{{tweet['image']}}", alt='')
-							.tweetcontent
-								p.small {{tweet['user']}}
-								p
-									| {{tweet['text']}}
-						hr
-				.col-lg-8.main
-					h1.page-header
-						| Dashboard
-					.row.placeholders
-		script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
-		script(src='js/bootstrap.min.js')
+  body(ng-controller="TweetDashCtrl")
+    script.
+      var userName = "#{name}"
+    .container-fluid
+      .row.row-offcanvas.row-offcanvas-left
+        #sidebar.col-lg-4(role='navigation')
+          .nav.nav-sidebar('ng-repeat'="tweet in tweets | orderBy:'id':true")
+            .tweet
+              .tweetavatar
+                img(src="{{tweet['image']}}", alt='')
+              .tweetcontent
+                p.small {{tweet['user']}}
+                p
+                  | {{tweet['text']}}
+            hr
+        .col-lg-8.main
+          h1.page-header
+            | Dashboard
+          .row.placeholders
+            .template('ng-include'="'image.html'")
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
+    script(src='js/bootstrap.min.js')
